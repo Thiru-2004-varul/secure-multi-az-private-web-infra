@@ -8,12 +8,12 @@ resource "aws_eip" "nat" {
 
 }
 resource "aws_nat_gateway" "main" {
-    count = length(aws_subnet.public)
-    subnet_id = aws_subnet.public[count.index].id
-    allocation_id = aws_eip.nat[count.index].id
+  count         = length(aws_subnet.public)
+  subnet_id     = aws_subnet.public[count.index].id
+  allocation_id = aws_eip.nat[count.index].id
 
-    tags = {
-      Name="nat-gateway-${count.index + 1}"
-    }
-  
+  tags = {
+    Name = "nat-gateway-${count.index + 1}"
+  }
+
 }
