@@ -15,7 +15,7 @@ data "aws_ami" "ubuntu" {
 resource "aws_launch_template" "web" {
   name_prefix   = "web-lt-ubuntu-"
   image_id      = data.aws_ami.ubuntu.id
-  instance_type = "t3.micro"
+  instance_type = var.instance_type
 
   network_interfaces {
     associate_public_ip_address = false
@@ -37,9 +37,9 @@ resource "aws_launch_template" "web" {
   }
 }
 resource "aws_autoscaling_group" "web" {
-  min_size         = 2
-  desired_capacity = 2
-  max_size         = 4
+  min_size         = var.asg_min
+  desired_capacity = var.asg_desired
+  max_size         = var.asg_max
 
   vpc_zone_identifier = aws_subnet.private[*].id
   target_group_arns   = [aws_lb_target_group.this.arn]
