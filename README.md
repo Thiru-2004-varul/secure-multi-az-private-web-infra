@@ -1,50 +1,78 @@
-<<<<<<< HEAD
-# secure-multi-az-private-web-infra
-=======
-# Secure Multi-AZ Private Web Infrastructure (Terraform – Plan Only)
+# Secure Multi-AZ Private Web Infrastructure (Terraform)
 
-## What This Project Is About
+## Project Overview
 
-This project is my take on building a **secure, highly available web infrastructure on AWS** using Terraform. The twist: everything is **plan-only**, so nothing is actually deployed. This lets me focus on **design, security, and architecture** without worrying about costs.  
+This project demonstrates how I designed and implemented a **secure, highly available AWS web infrastructure** using **Terraform**.
 
-The project is built **step by step**, adding each piece carefully so I can explain **why it’s needed** — perfect for interviews. I wanted to show that I know how to think like an engineer, not just copy-paste code from tutorials.
+The infrastructure is **plan-only**, meaning no AWS resources are created. This allows me to showcase **real-world cloud architecture, Terraform skills, and security best practices** without incurring any cost.
 
 ---
 
-## Key Highlights
+## What I Implemented
 
-- **Multi-AZ setup**: Everything runs across two availability zones for high availability.  
-- **Private EC2 instances**: The servers never face the public internet directly.  
-- **Public ALB**: Single entry point for users, routing traffic securely to private EC2.  
-- **NAT gateways**: Let private instances access the internet safely.  
-- **Security groups**: ALB and EC2 have separate groups, implementing a zero-trust model.  
-- **Auto Scaling**: Automatically scales private EC2 instances based on load.  
-- **Ubuntu 22.04 AMI**: Shows that I know how to configure launch templates with real AMIs.
+In this project, I personally implemented the following:
 
----
-
-## How I Built It
-
-- **Phase 1:** Set up Terraform with provider, version constraints, and variables.  
-- **Phase 2:** Created a VPC with DNS enabled. Learned why VPC is the blast radius.  
-- **Phase 3:** Created public and private subnets across 2 AZs.  
-- **Phase 4:** Set up routing tables: IGW for public, NAT for private.  
-- **Phase 5:** Added NAT gateways in public subnets for secure outbound internet access.  
-- **Phase 6:** Designed security groups: ALB open to the world, EC2 only allows ALB traffic.  
-- **Phase 7:** Built the ALB, target group, and listener. Configured health checks.  
-- **Phase 8:** Created a launch template with Ubuntu 22.04, configured ASG in private subnets, and connected it to the ALB.
+- Designed a **custom VPC** with DNS support enabled
+- Created **public and private subnets across multiple Availability Zones**
+- Configured **Internet Gateway** for public subnets
+- Configured **NAT Gateways per AZ** for secure outbound internet access from private subnets
+- Implemented **route tables and associations** for correct traffic flow
+- Built **zero-trust security groups** for ALB and EC2 instances
+- Deployed an **Application Load Balancer** with health checks
+- Created a **Launch Template** using Ubuntu AMI
+- Configured an **Auto Scaling Group** in private subnets
+- Automated **Terraform validation and plan** using GitHub Actions
 
 ---
 
-## Why This Matters
+## Architecture Summary
 
-By doing this project I can **talk confidently in interviews** about:
+- Public Subnets:
+  - Application Load Balancer
+  - NAT Gateways
 
-- How private instances reach the internet safely using NAT.  
-- Why you never expose EC2 directly to the internet.  
-- How ALB, target groups, and health checks keep applications highly available.  
-- How to write modular, production-level Terraform without incurring AWS costs.  
+- Private Subnets:
+  - EC2 instances managed by Auto Scaling Group
+
+- Traffic Flow:
+  - Internet → ALB → Private EC2
+  - Private EC2 → NAT Gateway → Internet
+
+This design ensures **high availability, security, and scalability**.
 
 ---
 
->>>>>>> dce39fd (Add README, Terraform configuration, variables, and CI workflow)
+## Skills Demonstrated
+
+This project demonstrates my knowledge of:
+
+- AWS VPC, Subnets, Route Tables, IGW, NAT Gateway
+- Application Load Balancer & Target Groups
+- Auto Scaling Groups and Launch Templates
+- Terraform variables, providers, and best practices
+- Infrastructure as Code (IaC)
+- Secure cloud networking design
+- CI/CD automation using GitHub Actions
+
+---
+
+## Why I Built This Project
+
+I built this project to:
+
+- Practice **real-world AWS infrastructure design**
+- Apply **Terraform best practices**
+- Demonstrate **cloud security and high availability concepts**
+- Create a **portfolio-ready project** for interviews
+
+---
+
+## How to Review This Project
+
+This project is **plan-only ,To avoid cost on aws**.
+
+To review:
+
+```bash
+terraform init
+terraform plan
