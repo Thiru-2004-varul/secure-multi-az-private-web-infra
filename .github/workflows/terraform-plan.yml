@@ -31,9 +31,6 @@ jobs:
               run: terraform validate
 
             - name: Terraform Plan
-<<<<<<< HEAD
-              run: terraform plan
-=======
               env:
                   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
                   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -45,4 +42,3 @@ jobs:
                   echo "AWS_ACCESS_KEY_ID is set ${AWS_ACCESS_KEY_ID:+YES}"
                   echo "AWS_SECRET_ACCESS_KEY is set ${AWS_SECRET_ACCESS_KEY:+YES}"
                   echo "AWS_DEFAULT_REGION ${AWS_DEFAULT_REGION}"
->>>>>>> dce39fd (Add README, Terraform configuration, variables, and CI workflow)
